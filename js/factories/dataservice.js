@@ -1,6 +1,6 @@
-app.factory("DataService", DataFactory);
+app.factory("DataService", DataService);
 
-function DataFactory(){
+function DataService(){
   var dataObj = {
     turtlesData: turtlesData,
     quizQuestions: quizQuestions

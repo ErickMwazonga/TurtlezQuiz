@@ -36,7 +36,7 @@
               </div>
               <div class="col-md-6">
                 <h4>{{ turtle.type }}</h4>
-                <p><strong>Location: </strong>{{ turtle.location }}</p>
+                <p><strong>Location: </strong>{{ turtle.locations }}</p>
                 <p><strong>Size: </strong>{{ turtle.size }}</p>
                 <p><strong>Average Life Span: </strong>{{ turtle.lifespan }}</p>
                 <p><strong>Diet: </strong>{{ turtle.diet }}</p>
@@ -65,7 +65,7 @@
 
               <div class="row top-buffer">
                 <div class="col-md-6">
-                  <p><strong>Location: </strong>{{ activeTurtle.location }}</p>
+                  <p><strong>Location: </strong>{{ activeTurtle.locations }}</p>
                   <p><strong>Size: </strong>{{ activeTurtle.size }}</p>
                   <p><strong>Average Life Span: </strong>{{ activeTurtle.lifespan }}</p>
                   <p><strong>Diet: </strong>{{ activeTurtle.diet }}</p>
@@ -86,10 +86,69 @@
     </div>
     <!-- List Controller -->
 
-    <div ng-controller="quizController" ng-show="quizMetrics.quizActive">
-      <h1>Quiz</h1>
+    <div ng-controller="quizCtrl" ng-show="quizMetrics.quizActive">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>Progress:</h2>
+          <div class="btn-toolbar">
+            <button class="btn" ng-repeat="question in dataService.quizQuestions" ng-class="{'btn-info':question.selected !== null,
+                               'btn-danger': question.selected === null}">
+              <span class="glyphicon" ng-class="{'glyphicon-pencil': question.selected !== null,
+                          'glyphicon-question-sign': question.selected === null}">
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <div class="col-xs-4">
+          <h4>Legend Saret:</h4>
+          <div class="col-sm-4 text-center">
+            <button class="btn btn-info">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+            <p>Answered</p>
+          </div>
+          <div class="col-sm-4 text-center">
+            <button class="btn btn-danger">
+              <span class="glyphicon glyphicon-question-sign"></span>
+            </button>
+            <p>Unanswered</p>
+          </div>
+
+        </div>
+      </div>
+      <!-- progress area -->
+
+      <div class="row">
+        <h3>Question:</h3>
+        <div class="well well-sm">
+          <div class="col-xs-12">
+            <h4>{{ activeQuestion+1 + "." + dataService.quizQuestions[activeQuestion].text }}</h4>
+          </div>
+          <div class="row" ng-if="dataService.quizQuestions[activeQuestion].type === 'text'">
+            <div class="col-xs-6" ng-repeat="answer in dataService.quizQuestions[activeQuestion].possibilities">
+              <h4 class="answer" ng-class="{'bg-info': $index === dataService.quizQuestions[activeQuestion].selected}" ng-click="selectAnswer($index)">
+                {{ answer.answer }}
+              </h4>
+            </div>
+          </div>
+
+          <div class="row" ng-if="dataService.quizQuestions[activeQuestion].type === 'image'">
+            <div class="col-sm-6" ng-repeat="answer in dataService.quizQuestions[activeQuestion].possibilities">
+              <div class="image-answer">
+                <img ng-src="{{ answer.answer }}">
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-warning" ng-click="questionAnswered()">Continue</button>
+        </div>
+      </div>
+      <!-- QUESTION:  -->
+
     </div>
     <!-- quiz-controller -->
+
   </div>
 
 
