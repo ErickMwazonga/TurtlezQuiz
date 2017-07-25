@@ -1,3 +1,1 @@
-(function(){
-  angular.module("turtlezFacts", []);
-})();
+var app = angular.module("turtlezFacts", []);
