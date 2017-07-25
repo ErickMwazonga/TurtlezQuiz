@@ -19,8 +19,13 @@
     </div>
 
     <div ng-controller="listCtrl">
+      <form class="form-inline well well-sm clearfix">
+        <span class="glyphicon-search"></span>
+        <input type="text" placeholder="Search..." class="form-control" ng-model="search">
+      </form>
+
       <div class="row">
-        <div class="col-sm-6" ng-repeat="turtle in data">
+        <div class="col-sm-6" ng-repeat="turtle in data | filter:search">
           <div class="well well-sm">
             <div class="row">
               <div class="col-md-6">
@@ -70,7 +75,7 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>

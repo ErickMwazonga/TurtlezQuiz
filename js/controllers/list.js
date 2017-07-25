@@ -10,10 +10,12 @@ function ListController($scope){
   $scope.activeTurtle = {};
   $scope.changeActiveTurtle = changeActiveTurtle;
 
+  $scope.search = "";
+
   function changeActiveTurtle(index){
     $scope.activeTurtle = index;
   }
-  
+
 }
 
 var turtlesData = [
