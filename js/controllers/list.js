@@ -3,17 +3,24 @@
 app.controller("listCtrl", ListController);
 
 function ListController($scope){
-  $scope.dummyData = "hello ANGULAR";
+  // $scope.dummyData = "hello ANGULAR";
 
   $scope.data = turtlesData;
 
   $scope.activeTurtle = {};
   $scope.changeActiveTurtle = changeActiveTurtle;
+  $scope.activateQuiz = activateQuiz;
 
   $scope.search = "";
 
+  $scope.quizActive = false;
+
   function changeActiveTurtle(index){
     $scope.activeTurtle = index;
+  }
+
+  function activateQuiz(){
+    $scope.quizActive = true;
   }
 
 }

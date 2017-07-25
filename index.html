@@ -18,10 +18,13 @@
       </h3>
     </div>
 
-    <div ng-controller="listCtrl">
+    <div ng-controller="listCtrl" ng-hide="quizActive">
       <form class="form-inline well well-sm clearfix">
         <span class="glyphicon-search"></span>
         <input type="text" placeholder="Search..." class="form-control" ng-model="search">
+        <button class="btn btn-warning pull-right" ng-click="activateQuiz()">
+          <strong>Start Quiz</strong>
+        </button>
       </form>
 
       <div class="row">
@@ -81,15 +84,24 @@
         </div>
       </div>
     </div>
+    <!-- List Controller -->
 
+    <div ng-controller="quizController">
+
+    </div>
+    <!-- quiz-controller -->
   </div>
 
 
   <script src="js/angular.min.js" type="text/javascript"></script>
   <script src="js/jquery.js" type="text/javascript"></script>
   <script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+  <!-- Application scripts -->
   <script src="js/app.js" type="text/javascript"></script>
   <script src="js/controllers/list.js" type="text/javascript"></script>
+  <script src="js/controllers/quiz.js" type="text/javascript"></script>
+  <script src="js/factories/quizMetrics.js" type="text/javascript"></script>
 
 </body>
 
