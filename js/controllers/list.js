@@ -23,8 +23,6 @@ function ListController($scope, quizMetrics, DataService){
   }
 
   function activateQuiz(){
-    // $scope.quizActive = true;
-    // $scope.quizMetrics.quizActive = true;
     quizMetrics.changeState(true);
   }
 }

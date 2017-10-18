@@ -9,20 +9,30 @@ function QuizController($scope, quizMetrics, DataService){
   $scope.setActiveQuestion = setActiveQuestion;
   $scope.selectAnswer = selectAnswer;
   $scope.activeQuestion = 0;
+  $scope.error = false;
+  $scope.finalise = false;
 
   var numQuestionsAnswered = 0;
 
-  function setActiveQuestion(){
-    var breakOut = false;
-    var quizLength = DataService.quizQuestions.length - 1;
+  function setActiveQuestion(index){
+      if(index === undefined ){
+         var breakOut = false;
+         var quizLength = DataService.quizQuestions.length - 1;
 
-    while(!breakOut){
-      $scope.activeQuestion = $scope.activeQuestion < quizLength?++$scope.activeQuestion:0;
+         while(!breakOut){
+            $scope.activeQuestion = $scope.activeQuestion < quizLength?++$scope.activeQuestion:0;
 
-      if(DataService.quizQuestions[$scope.activeQuestion].selected == null){
-        breakOut = true;
+            if($scope.activeQuestion === 0){
+               $scope.error = true;
+            }
+
+            if(DataService.quizQuestions[$scope.activeQuestion].selected === null){
+               breakOut = true;
+            }
+         }
+      }else{
+         $scope.activeQuestion = index;
       }
-    }
   }
 
   function questionAnswered(){
@@ -33,6 +43,15 @@ function QuizController($scope, quizMetrics, DataService){
       numQuestionsAnswered++;
       if(numQuestionsAnswered >= quizLength){
         //finalise quiz
+         for (var i = 0; i < quizLength; i++) {
+            if(DataService.quizQuestions[i].selected === null){
+               setActiveQuestion(i);
+               return;
+            }
+         }
+         $scope.error = false;
+         $scope.finalise = true;
+         return;
       }
     }
 
